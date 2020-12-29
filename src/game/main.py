@@ -1,5 +1,5 @@
-from ..client.client import Client
-from ..server.server import Server
+from src.client.client import Client
+from src.server.server import Server
 from game import Game
 
 

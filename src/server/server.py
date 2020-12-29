@@ -1,8 +1,8 @@
 import socket
-from ..core.connection import Connection
-from ..core.constants import MessageType, MAX_CONNECT_REQUEST
-from ..core.message import Message
-from ..core.exceptions import UnexpectedMessageError
+from src.core.connection import Connection
+from src.core.constants import MessageType, MAX_CONNECT_REQUEST
+from src.core.message import Message
+from src.core.exceptions import UnexpectedMessageError
 
 
 class Server:
@@ -27,4 +27,4 @@ class Server:
         return self.connection
 
     def end(self):
-        pass
+        self.connection().send(Message(MessageType.DISCONNECT, []))
