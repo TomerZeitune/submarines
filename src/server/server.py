@@ -8,14 +8,15 @@ from src.core.exceptions import UnexpectedMessageError
 class Server:
     def __init__(self, port):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.bind((socket.gethostname(), port))
+        sock.bind(("0.0.0.0", port))
         sock.listen(MAX_CONNECT_REQUEST)
-        self.connection = Connection(sock.accept())
+        self.__connection = Connection(sock.accept())
 
+# TODO Fix AttributeError: 'tuple' object has no attribute 'recv'
+    
     def begin(self):
         message = self.connection().receive()
         if message.type_id == MessageType.BEGIN_SESSION:
-            self.connection().send(Message(MessageType.YES, []))
             self.connection().send(Message(MessageType.READY, []))
             return
         elif message.type_id == MessageType.CONTINUE_SESSION:
@@ -24,7 +25,7 @@ class Server:
         raise UnexpectedMessageError()
 
     def connection(self):
-        return self.connection
+        return self.__connection
 
     def end(self):
         self.connection().send(Message(MessageType.DISCONNECT, []))

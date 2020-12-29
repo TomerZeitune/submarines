@@ -9,7 +9,7 @@ class Client:
     def __init__(self, ip, port):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.connect((ip, port))
-        self.connection = Connection(sock)
+        self.__connection = Connection(sock)
 
     def begin(self):
         self.connection().send(Message(MessageType.BEGIN_SESSION, []))
@@ -22,7 +22,7 @@ class Client:
         raise UnexpectedMessageError()
 
     def connection(self):
-        return self.connection
+        return self.__connection
 
     def end(self):
         self.connection().send(Message(MessageType.DISCONNECT, []))
