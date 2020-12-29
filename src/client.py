@@ -1,5 +1,8 @@
 import socket
 from connection import Connection
+from message import Message
+from constants import MessageType
+from exceptions import DeniedError, UnexpectedMessageError
 
 
 class Client:
@@ -9,7 +12,14 @@ class Client:
         self.connection = Connection(sock)
 
     def begin(self):
-        pass
+        self.connection().send(Message(MessageType.BEGIN_SESSION, []))
+        message = self.connection().receive()
+        if message.type_id == MessageType.YES:
+            self.connection().send(Message(MessageType.READY, []))
+            return
+        elif message.type_id == MessageType.NO:
+            raise DeniedError("The server denied the request")
+        raise UnexpectedMessageError()
 
     def connection(self):
         return self.connection

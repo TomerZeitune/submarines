@@ -1,6 +1,8 @@
 import socket
 from connection import Connection
-from constants import MAX_CONNECT_REQUEST
+from constants import MessageType, MAX_CONNECT_REQUEST
+from message import Message
+from exceptions import UnexpectedMessageError
 
 
 class Server:
@@ -11,7 +13,15 @@ class Server:
         self.connection = Connection(sock.accept())
 
     def begin(self):
-        pass
+        message = self.connection().receive()
+        if message.type_id == MessageType.BEGIN_SESSION:
+            self.connection().send(Message(MessageType.YES, []))
+            self.connection().send(Message(MessageType.READY, []))
+            return
+        elif message.type_id == MessageType.CONTINUE_SESSION:
+            self.connection().send(Message(MessageType.NO, []))
+            return
+        raise UnexpectedMessageError()
 
     def connection(self):
         return self.connection
