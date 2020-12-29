@@ -1,8 +1,8 @@
 import socket
-from connection import Connection
-from message import Message
-from constants import MessageType
-from exceptions import DeniedError, UnexpectedMessageError
+from ..core.connection import Connection
+from ..core.message import Message
+from ..core.constants import MessageType
+from ..core.exceptions import DeniedError, UnexpectedMessageError
 
 
 class Client:

@@ -1,8 +1,8 @@
 import socket
-from connection import Connection
-from constants import MessageType, MAX_CONNECT_REQUEST
-from message import Message
-from exceptions import UnexpectedMessageError
+from ..core.connection import Connection
+from ..core.constants import MessageType, MAX_CONNECT_REQUEST
+from ..core.message import Message
+from ..core.exceptions import UnexpectedMessageError
 
 
 class Server:
