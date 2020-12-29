@@ -23,3 +23,5 @@ MESSAGE_FIELDS_COUNTS = {
     MessageType.SUBMARINE_SINK: 3,
     MessageType.KEEP_ALIVE: 0,
 }
+
+FIELD_SIZE = 2
