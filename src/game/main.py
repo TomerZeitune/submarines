@@ -5,7 +5,10 @@ from src.core.logging import Logger
 
 
 def main():
-    Game(Client("localhost", 5555)).play(True)
+    peer = Server(5555)
+    peer.begin()
+    Game().play(True)
+    peer.end()
 
 
 if __name__ == "__main__":
