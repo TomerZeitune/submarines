@@ -12,7 +12,7 @@ class MessageType:
 
 
 MESSAGE_FIELDS_COUNTS = {
-    MessageType.BEGIN_SESSION: 3,
+    MessageType.BEGIN_SESSION: 2,
     MessageType.YES: 0,
     MessageType.NO: 0,
     MessageType.CONTINUE_SESSION: 2,

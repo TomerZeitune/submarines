@@ -3,6 +3,7 @@ from src.core.connection import Connection
 from src.core.message import Message
 from src.core.constants import MessageType
 from src.core.exceptions import DeniedError, UnexpectedMessageError
+from src.core.logging import Logger
 
 
 class Client:
@@ -12,7 +13,9 @@ class Client:
         self.__connection = Connection(sock)
 
     def begin(self):
-        self.connection().send(Message(MessageType.BEGIN_SESSION, []))
+        Logger.debug("client begin - ")
+        self.connection().send(Message(MessageType.BEGIN_SESSION, [0, 0]))
+        Logger.debug("client begin - Message received")
         message = self.connection().receive()
         if message.type_id == MessageType.YES:
             self.connection().send(Message(MessageType.READY, []))

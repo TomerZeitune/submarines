@@ -3,6 +3,7 @@ from src.core.connection import Connection
 from src.core.constants import MessageType, MAX_CONNECT_REQUEST
 from src.core.message import Message
 from src.core.exceptions import UnexpectedMessageError
+from src.core.logging import Logger
 
 
 class Server:
@@ -12,11 +13,12 @@ class Server:
         sock.listen(MAX_CONNECT_REQUEST)
         self.__connection = Connection(sock.accept()[0])
 
-# TODO Fix AttributeError: 'tuple' object has no attribute 'recv'
-
     def begin(self):
+        Logger.debug("server begin - ")
         message = self.connection().receive()
+        Logger.debug("server begin - Message received")
         if message.type_id == MessageType.BEGIN_SESSION:
+            self.connection().send(Message(MessageType.YES, []))
             self.connection().send(Message(MessageType.READY, []))
             return
         elif message.type_id == MessageType.CONTINUE_SESSION:
