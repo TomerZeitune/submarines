@@ -1,6 +1,6 @@
 from src.core.constants import MessageType, MESSAGE_FIELDS_COUNTS, FIELD_SIZE
 from src.core.message import Message
-from src.core.logging import Logger
+from src.core.logger import Logger
 import socket
 from struct import unpack
 

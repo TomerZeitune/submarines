@@ -3,7 +3,7 @@ from src.core.connection import Connection
 from src.core.constants import MessageType, MAX_CONNECT_REQUEST
 from src.core.message import Message
 from src.core.exceptions import UnexpectedMessageError
-from src.core.logging import Logger
+from src.core.logger import Logger
 
 
 class Server:

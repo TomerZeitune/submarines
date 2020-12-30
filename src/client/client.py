@@ -3,7 +3,7 @@ from src.core.connection import Connection
 from src.core.message import Message
 from src.core.constants import MessageType
 from src.core.exceptions import DeniedError, UnexpectedMessageError
-from src.core.logging import Logger
+from src.core.logger import Logger
 
 
 class Client:
