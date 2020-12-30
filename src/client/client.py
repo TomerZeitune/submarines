@@ -13,13 +13,12 @@ class Client:
         self.__connection = Connection(sock)
 
     def begin(self):
-        Logger.debug("client begin - ")
         self.connection().send(Message(MessageType.BEGIN_SESSION, [0, 0]))
-        Logger.debug("client begin - Message received")
         message = self.connection().receive()
         if message.type_id == MessageType.YES:
             self.connection().send(Message(MessageType.READY, []))
-            return
+            if self.connection().receive().type_id == MessageType.READY:
+                return
         elif message.type_id == MessageType.NO:
             raise DeniedError("The server denied the request")
         raise UnexpectedMessageError()

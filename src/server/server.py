@@ -14,13 +14,12 @@ class Server:
         self.__connection = Connection(sock.accept()[0])
 
     def begin(self):
-        Logger.debug("server begin - ")
         message = self.connection().receive()
-        Logger.debug("server begin - Message received")
         if message.type_id == MessageType.BEGIN_SESSION:
             self.connection().send(Message(MessageType.YES, []))
             self.connection().send(Message(MessageType.READY, []))
-            return
+            if self.connection().receive().type_id == MessageType.READY:
+                return
         elif message.type_id == MessageType.CONTINUE_SESSION:
             self.connection().send(Message(MessageType.NO, []))
             return

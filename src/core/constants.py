@@ -7,7 +7,7 @@ class MessageType:
     ERROR = 5
     DISCONNECT = 6
     READY = 7
-    SUBMARINE_SINK = 8
+    SUBMARINE_SANK = 8
     KEEP_ALIVE = 9
 
 
@@ -20,9 +20,12 @@ MESSAGE_FIELDS_COUNTS = {
     MessageType.ERROR: 1,
     MessageType.DISCONNECT: 0,
     MessageType.READY: 0,
-    MessageType.SUBMARINE_SINK: 3,
+    MessageType.SUBMARINE_SANK: 3,
     MessageType.KEEP_ALIVE: 0,
 }
 
+SEA = 0
+SUB = 1
+HIT = 2
 FIELD_SIZE = 2
 MAX_CONNECT_REQUEST = 5
