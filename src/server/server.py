@@ -10,10 +10,10 @@ class Server:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.bind(("0.0.0.0", port))
         sock.listen(MAX_CONNECT_REQUEST)
-        self.__connection = Connection(sock.accept())
+        self.__connection = Connection(sock.accept()[0])
 
 # TODO Fix AttributeError: 'tuple' object has no attribute 'recv'
-    
+
     def begin(self):
         message = self.connection().receive()
         if message.type_id == MessageType.BEGIN_SESSION:
