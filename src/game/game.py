@@ -72,10 +72,10 @@ class Game:
                 self.__attack()
             else:
                 self.__defend()
-            self.__is_over = True
-            for row in self.table:
-                for column in row:
-                    if column == SUB:
-                        self.__is_over = False
-            if self.__is_over:
-                print("You lost!")
+                self.__is_over = True
+                for row in self.table:
+                    for column in row:
+                        if column == SUB:
+                            self.__is_over = False
+                if self.__is_over:
+                    print("You lost!")
